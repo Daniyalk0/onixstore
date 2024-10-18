@@ -68,6 +68,7 @@ function App() {
     };
   }, [authService, service]);
 
+
   useEffect(() => {
     authService.getCurrentUser().then((userData) => {
       if (userData) {

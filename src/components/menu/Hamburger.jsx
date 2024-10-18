@@ -143,21 +143,41 @@ function Hamburger() {
 
 
   useEffect(() => {
-  
-    gsap.fromTo(
-      ".animate-me",
-      {
-        opacity: 0, 
-        y: 50, 
-      },
-      {
-        opacity: 1, 
-        y: 0, 
-        duration: 1.2, 
-        delay: 2.2, 
-      }
-    );
-  }, []);
+    const hasAnimated = sessionStorage.getItem("hasAnimated");
+
+    if (!hasAnimated) {
+      gsap.fromTo(
+        ".animate-me",
+        {
+          opacity: 0, 
+          y: 50, 
+        },
+        {
+          opacity: 1,
+          y: 0, 
+          duration: 1.5, 
+          delay: 2.2, 
+        }
+      );
+
+      sessionStorage.setItem("hasAnimated", "true");
+    }else{
+      gsap.fromTo(
+        ".animate-me",
+        {
+          opacity: 0, 
+          y: 50,
+        },
+        {
+          opacity: 1, 
+          y: 0, 
+          duration: 1.5, 
+          delay: 0.2, 
+
+        }
+      );
+    }
+  }, []); 
 
   useEffect(() => {
     if (isOpen) {

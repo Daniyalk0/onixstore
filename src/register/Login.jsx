@@ -49,7 +49,13 @@ function Login({ handleToggle, className }) {
 
   const { isAnimating, animatee } = useMyContext();
 
-
+  const handleKeyPress = (event, submitForm) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevents the default form submission
+      console.log('Enter key pressed');
+      submitForm(); // Manually trigger the form submission
+    }
+  };
 
   return (
     <div
@@ -123,6 +129,7 @@ function Login({ handleToggle, className }) {
             setSubmitting(false); 
           }
         }}
+      
       >
         {({
           isSubmitting,
@@ -133,7 +140,8 @@ function Login({ handleToggle, className }) {
           handleChange,
           handleSubmit,
         }) => (
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit}
+              onKeyDown={(e) => handleKeyPress(e, handleSubmit)}>
             <div className="flex flex-col gap-2 font-pop sm:gap-5 xl:gap-4 xxs:gap-2 justify-center items-center w-full ">
               <div
                 className={`font-pop text-zinc-700 font-light flex flex-col  gap-[2px]  xl:gap-[0px] xxs:gap-0 xs:gap-0  md:w-[100%] lg:w-[100%]  w-[90%] xl:w-[80%] relative`}

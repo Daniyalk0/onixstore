@@ -91,7 +91,7 @@ function Landing() {
               route={"/Men's Sneaker"}
                 text={"shop now"}
                 className={
-                  " w-[95vw] text-[2.2vw] py-3 mt-[15px] md:w-[94vw] md:mt-[25px] lg:w-[20vw] lg:text-[1.1vw] xl:w-[13vw] xxs:w-[93vw] animate-me" 
+                  " w-[95vw] xs:text-[3vw] text-[2.5vw] py-3 mt-[15px] md:w-[94vw] md:mt-[25px] lg:w-[20vw] lg:text-[1.1vw] xl:w-[13vw] xxs:w-[93vw] animate-me" 
                 }
                 />
             </div>
@@ -147,33 +147,33 @@ function Landing() {
           </div>
         </div>
         <div
-          className="brands bg-zinc-900 px-6 py-10 mt-[30px] mb-0 flex items-center justify-around flex-wrap gap-4 lg:gap-0 lg:mt-0 xl:justify-center xl:gap-32 "
+          className="brands bg-zinc-900 px-6 py-10 mt-[30px] mb-0 flex items-center justify-around flex-wrap gap-4 lg:gap-0 lg:mt-0 xl:justify-center xl:gap-32 xs:py-5 xxs:py-4"
           ref={containerRef}
         >
           <img
             src="./brands/versace.png"
             alt=""
-            className="xl:scale-120 animate-me2"
+            className="xl:scale-120 animate-me2 xxs:w-[15vw] xs:w-[18vw]"
           />
           <img
             src="./brands/zara.png"
             alt=""
-            className="xl:scale-120 animate-me2"
+            className="xl:scale-120 animate-me2 xxs:w-[15vw] xs:w-[15vw]"
           />
           <img
             src="./brands/gucci.png"
             alt=""
-            className="xl:scale-120 animate-me2"
+            className="xl:scale-120 animate-me2 xxs:w-[15vw] xs:w-[18vw]"
           />
           <img
             src="./brands/prada.png"
             alt=""
-            className="xl:scale-120 animate-me2"
+            className="xl:scale-120 animate-me2 xxs:w-[15vw] xs:w-[18vw]"
           />
           <img
             src="./brands/calvin.png"
             alt=""
-            className="xl:scale-120 animate-me2"
+            className="xl:scale-120 animate-me2 xxs:w-[15vw] xs:w-[18vw]"
           />
         </div>
       </div>
