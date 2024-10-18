@@ -566,7 +566,7 @@ function Filter({ className, setFiltered2, datad }) {
             }
           }}
           className={
-            "text-[3vw] w-full md:text-[1.7vw] lg:text-[1.5vw] lg:py-3 xl:py-2 xl:text-[1vw] md:py-3 xl:mt-8"
+            "text-[3vw] w-[70vw] md:text-[1.7vw] lg:text-[1.5vw] lg:py-3 xl:py-2 xl:text-[1vw] md:py-3 xl:mt-8 lg:w-[19vw]"
           }
         />
       </div>

@@ -218,6 +218,9 @@ function CartPage() {
                               className="text-[3vw] font-satoshiBold xs:text-[4vw] lg:text-[2vw] xl:text-[1vw] animate-me cursor-pointer"
                               onClick={(event) => {
                                 if (!itemsLoading) {
+                                  if (cart.productQuantity === 1) {
+                                    removeProduct(cart?.productImage, cart?.$id);
+                                  }
                                   event.preventDefault(); // Prevent navigation
                                   decreaseQuantity(cart?.$id); // Call your decreaseQuantity function
                                 }

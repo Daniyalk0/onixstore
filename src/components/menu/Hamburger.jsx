@@ -308,8 +308,11 @@ function Hamburger() {
                         className="text-[2vw] md:text-[3vw] lg:text-[2.5vw] xl:text-[1.5vw] xl:w-[1vw] md:w-[2vw]  xs:text-[3vw]"
                         onClick={(event) => {
                           if (!itemsLoading) {
-                            event.preventDefault();
-                            decreaseQuantity(prod?.$id); 
+                            if (prod.productQuantity === 1) {
+                              removeProduct(prod?.productImage, prod?.$id);
+                            }
+                            event.preventDefault(); // Prevent navigation
+                            decreaseQuantity(prod?.$id); // Call your decreaseQuantity function
                           }
                         }}
             
@@ -358,12 +361,12 @@ function Hamburger() {
           <h1 className="">Sub Total:</h1>
           <h1 className="">${subTotal?.toFixed(2)}</h1>
         </div>
-        <NavLink to={"/cartPage"} onClick={() => setCartState(false)}>
           <GlobalBtn
+          onClick={() => setCartState(false)}
             text={"view cart"}
+            route={"/cartPage"}
             className={"w-full h-11 text-[3vw] mt-12 xs:mt-6"}
           />
-        </NavLink>
       </div>
 
       {showSearch && (
