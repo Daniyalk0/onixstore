@@ -215,7 +215,7 @@ function Hamburger() {
 
   return (
     <div
-      className={`sm:hidden  w-full bg-[#F2F0F1] z-[999] px-8 py-8 h-[10vh] flex items-center  justify-between xs:px-3 xs:py-8 fixed  ${
+      className={`sm:hidden backdrop-filter backdrop-blur-md w-full  z-[999] px-8 py-8 h-[10vh] flex items-center  justify-between xs:px-3 xs:py-8 fixed  ${
         showNavbar ? "-translate-y-0" : "-translate-y-28"
       } transition-all duration-200 ${
         value ? "brightness-75 " : ""
