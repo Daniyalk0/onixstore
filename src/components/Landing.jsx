@@ -60,7 +60,7 @@ function Landing() {
           duration: 1.2,
           scrollTrigger: {
             trigger: containerRef.current, 
-            start: "bottom bottom", 
+            start: "top center", 
             toggleActions: "play none none none", 
           },
         }
@@ -70,7 +70,7 @@ function Landing() {
 
   return (
     <Container>
-      <div className={`w-full xl:pt-[5.4vw] pt-[22vw]   bg-white`}>
+      <div className={`w-full xl:pt-[5.4vw] pt-[22vw]   bg-white redmi8:bg-red-600`}>
         <div className="flex flex-col lg:flex-row lg:items-start xl:pb-4">
           <div className="w-full py-6 xs:px-3 xs:py-4 sm:px-3 md:px-6 md:py-8 lg:pl-14 lg:pr-0 lg:w-[60%] lg:mt-[90px] xl:px-14 2xl:px-8">
             <div className="font-integral text-[7vw] leading-none md:text-[6vw] lg:font-integral2 lg:text-[4vw] overflow-hidden">

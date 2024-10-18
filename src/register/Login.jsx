@@ -214,14 +214,14 @@ function Login({ handleToggle, className }) {
                   <div onClick={() => setPasswordShow((prev) => !prev)}>
                     {passwordShow ? (
                       <FaRegEyeSlash
-                        className={`absolute top-[40%] lg:top-[40%] right-10 text-[#00000078] xs:text-[2.5vw] lg:text-[1.5vw] 
-                       xxs:top-[43%] xxs:right-7 xl:top-[55%] xl:right-[1.5vw]   md:top-[33%] xs:top-[32%] xl:text-[0.9vw]
+                        className={`absolute top-[50%] lg:top-[40%] right-10 text-[#00000078] xs:text-[2.5vw] lg:text-[1.5vw] 
+                       xxs:top-[50%] xxs:right-3 xl:top-[55%] xl:right-[1.5vw] xs:right-4   md:top-[33%] xs:top-[50%] xl:text-[0.9vw]
                      `}
                       />
                     ) : (
                       <FaRegEye
-                        className={`absolute top-[40%] xl:text-[0.9vw] xs:top-[43%] xs:right-8  right-10 md:top-[33%] text-[#00000078] xs:text-[2.5vw] lg:text-[1.5vw] 
-                       xxs:top-[43%] xxs:right-7 xl:top-[55%]  xl:right-[1.5vw]
+                        className={`absolute top-[50%] xl:text-[0.9vw] xs:top-[50%] xs:right-4   right-6 md:top-[33%] text-[#00000078] xs:text-[2.5vw] lg:text-[1.5vw] 
+                       xxs:top-[50%] xxs:right-3 xl:top-[55%]  xl:right-[1.5vw]
                        `}
                       />
                     )}

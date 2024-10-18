@@ -100,15 +100,15 @@ function Hamburger() {
 
     cartControl();
     return () => {
-      document.body.style.overflow = "auto"; 
+      document.body.style.overflow = "auto";
     };
   }, [cartState]);
 
   const getItemsLimit = () => {
     const width = window.innerWidth;
-    if (width < 768) return 12; 
-    if (width >= 1024 && width < 1280) return 15; 
-    if (width >= 1280) return 30; 
+    if (width < 768) return 12;
+    if (width >= 1024 && width < 1280) return 15;
+    if (width >= 1280) return 30;
   };
 
   useEffect(() => {
@@ -119,12 +119,11 @@ function Hamburger() {
       ...item,
       displayName:
         screenWidth >= 1280
-          ? item.name 
+          ? item.name
           : item.name.length > limit
-          ? item.name.slice(0, limit) + "..." 
+          ? item.name.slice(0, limit) + "..."
           : item.name,
     }));
-
 
     setNamesUpdated(updatedCartItems);
   }, [cartItems]);
@@ -133,7 +132,7 @@ function Hamburger() {
     const calculateSubtotal = () => {
       setSubTotal(
         allProducts?.reduce((total, cartItem) => {
-          return total + cartItem.productPrice * cartItem.productQuantity; // 
+          return total + cartItem.productPrice * cartItem.productQuantity; //
         }, 0)
       );
     };
@@ -141,71 +140,49 @@ function Hamburger() {
     calculateSubtotal();
   }, [allProducts]);
 
-
   useEffect(() => {
-    const hasAnimated = sessionStorage.getItem("hasAnimated");
-
-    if (!hasAnimated) {
-      gsap.fromTo(
-        ".animate-me",
-        {
-          opacity: 0, 
-          y: 50, 
-        },
-        {
-          opacity: 1,
-          y: 0, 
-          duration: 1.5, 
-          delay: 2.2, 
-        }
-      );
-
-      sessionStorage.setItem("hasAnimated", "true");
-    }else{
-      gsap.fromTo(
-        ".animate-me",
-        {
-          opacity: 0, 
-          y: 50,
-        },
-        {
-          opacity: 1, 
-          y: 0, 
-          duration: 1.5, 
-          delay: 0.2, 
-
-        }
-      );
-    }
-  }, []); 
+    gsap.fromTo(
+      ".animate-me",
+      {
+        opacity: 0,
+        y: 50,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1.5,
+        delay: 2.2,
+      }
+    );
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
       gsap.fromTo(
         ".animate-me2",
         {
-          opacity: 0, 
-          y: 50, 
+          opacity: 0,
+          y: 50,
         },
         {
-          opacity: 1, 
-          y: 0, 
-          duration: 1.1, 
-          delay: 0.1, 
+          opacity: 1,
+          y: 0,
+          duration: 1.1,
+          delay: 0.1,
         }
       );
     }
-  }, [isOpen]); 
+  }, [isOpen]);
 
   useEffect(() => {
     gsap.fromTo(
       ".animateMeCart",
       {
-        opacity: 0, 
-        x: 100, 
+        opacity: 0,
+        x: 100,
       },
       {
-        opacity: 1, 
+        opacity: 1,
         x: 0,
         duration: 0.8,
         delay: 0.3,
@@ -223,13 +200,16 @@ function Hamburger() {
       onClick={() => setValue(false)}
     >
       <div
-        className={`cart min-h-screen fixed border-2 border-red-600 ${
+        className={`cart min-h-screen fixed  ${
           cartState ? "right-0" : "right-[-100vw]"
-        } w-[50vw] flex justify-center flex-col z-[1000] bg-white top-[0vw] transition-all duration-300 px-3 py-4 xs:py-8 xs:w-[58vw] xs:justify-between `}
+        } w-[50vw] flex justify-center flex-col z-[1000] bg-white top-[0vw] transition-all duration-300 px-3 py-4 xs:py-8 xs:w-[58vw] xs:justify-between overflow-y-scroll`}
       >
         <div className="w-full flex  justify-between text-2xl font-semibold font-satoshi items-center">
           <h1>Cart</h1>
-          <RxCross2 className="cursor-pointer" onClick={() => setCartState(false)} />
+          <RxCross2
+            className="cursor-pointer"
+            onClick={() => setCartState(false)}
+          />
         </div>
         <div className="overflow-y-auto max-h-[70vh] w-full mt-[6vw] flex flex-col items-center  min-h-[70vh] gap-0  xs:gap-3">
           {allProducts?.length > 0 ? (
@@ -245,8 +225,8 @@ function Hamburger() {
                   onClick={(e) => {
                     if (itemsLoading) {
                       e.preventDefault(); // Prevent navigation if items are still loading
-                    }else{
-                      setCartState(false)
+                    } else {
+                      setCartState(false);
                     }
                   }}
                 >
@@ -315,7 +295,6 @@ function Hamburger() {
                             decreaseQuantity(prod?.$id); // Call your decreaseQuantity function
                           }
                         }}
-            
                       />
                     )}
                     <h2 className="font-satoshi font-semibold text-[2.6vw] md:text-[3vw] lg:text-[2vw] xl:text-[1vw] w-[1vw] ">
@@ -332,7 +311,6 @@ function Hamburger() {
                     ) : (
                       <FaPlus
                         className="text-[2vw] md:text-[3vw] lg:text-[2.5vw] xl:text-[1.5vw] xl:w-[1vw] md:w-[2vw] xs:text-[3vw]"
-                     
                         onClick={() => {
                           if (!itemsLoading) {
                             IncreaseQuantity(prod?.$id, 1);
@@ -361,12 +339,12 @@ function Hamburger() {
           <h1 className="">Sub Total:</h1>
           <h1 className="">${subTotal?.toFixed(2)}</h1>
         </div>
-          <GlobalBtn
+        <GlobalBtn
           onClick={() => setCartState(false)}
-            text={"view cart"}
-            route={"/cartPage"}
-            className={"w-full h-11 text-[3vw] mt-12 xs:mt-6"}
-          />
+          text={"view cart"}
+          route={"/cartPage"}
+          className={"w-full h-11 text-[3vw] mt-12 xs:mt-6"}
+        />
       </div>
 
       {showSearch && (
@@ -406,19 +384,23 @@ function Hamburger() {
       <div
         className={`icons flex items-center gap-6 xs:gap-4 relative z-[999] ${
           isOpen ? "text-white" : ""
-        } transition-all duration-200 animate-me`}
+        } transition-all duration-200 animate-me `}
       >
         <IoSearch className={`w-[7vw] h-[4vh] `} onClick={handleSearchClick} />
-        <LuShoppingCart
-          className={`w-[7vw] h-[4vh] `}
-          onClick={() => {
-            setCartState(!cartState), console.log("cart");
-          }}
-        />
-        <h2 className="absolute bg-black py-[0.2vw] px-2 rounded-full text-white left-[15vw] top-[-1.2vw] text-center font-semibold xs:text-[3vw] xs:left-[14.5vw] xs:top-[-1vw]">
-          {" "}
-          {allProducts?.length}
-        </h2>
+        <div className={`${
+              authStatus ? "block" : "hidden"
+            }`}>
+          <LuShoppingCart
+            className={`w-[7vw] h-[4vh] `}
+            onClick={() => {
+              setCartState(!cartState), console.log("cart");
+            }}
+          />
+          <h2 className="absolute bg-black py-[0.2vw] px-2 rounded-full text-white left-[15vw] top-[-1.2vw] text-center font-semibold xs:text-[3vw] xs:left-[14.5vw] xs:top-[-1vw]">
+            {" "}
+            {allProducts?.length}
+          </h2>
+        </div>
         <div onClick={logOutHandler}>
           {authState && authStatus ? (
             <PiSignOut className={`w-[9vw] h-[7vw]`} />

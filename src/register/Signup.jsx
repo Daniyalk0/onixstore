@@ -158,7 +158,7 @@ function Signup({ className, handleToggle }) {
                   name="username"
                   type="text"
                   onBlur={handleBlur}
-                  className={`w-full xl:w-[80%] h-full md:py-[1vw] border-[1px] border-[#00000015] py-2 rounded-md pl-2 text-[3vw] outline-none  transition-all duration-200 xs:py-[1.3vw] md:text-[1.9vw] xl:text-[1vw] xl:py-[0.5vw] bg-[#EBEEF0] ${
+                  className={` w-full xl:w-[80%] h-full md:py-[1vw] border-[1px] border-[#00000015] py-2 rounded-md pl-2 text-[3vw] outline-none  transition-all duration-200 xs:py-[1.5vw] md:text-[1.9vw] xl:text-[1vw] xl:py-[0.5vw] bg-[#EBEEF0] xxs:py-[2.5vw]  ${
                     touched.username
                       ? errors.username
                         ? "border-red-500"
@@ -243,14 +243,14 @@ function Signup({ className, handleToggle }) {
                   <div onClick={() => setPasswordShow((prev) => !prev)}>
                     {passwordShow ? (
                       <FaRegEyeSlash
-                        className={`absolute top-[40%] lg:top-[40%] right-4 text-[#00000078] xs:text-[2.5vw] lg:text-[1.5vw] 
-                               xxs:top-[32%] xl:top-[55%] xl:right-[8vw]   md:top-[33%] xs:top-[32%] xl:text-[0.9vw]
+                        className={`absolute top-[50%] lg:top-[40%] right-4 text-[#00000078] xs:text-[2.5vw] lg:text-[1.5vw] 
+                               xxs:top-[50%] xl:top-[55%] xl:right-[8vw]   md:top-[33%] xs:top-[50%] xl:text-[0.9vw]
                              `}
                       />
                     ) : (
                       <FaRegEye
-                        className={`absolute top-[40%] xl:text-[0.9vw] xs:top-[32%]  right-4 md:top-[33%] text-[#00000078] xs:text-[2.5vw] lg:text-[1.5vw] 
-                               xxs:top-[32%] xl:top-[55%] xl:right-[8vw]
+                        className={`absolute top-[50%] xl:text-[0.9vw] xs:top-[50%]  right-4 md:top-[33%] text-[#00000078] xs:text-[2.5vw] lg:text-[1.5vw] 
+                               xxs:top-[50%] xl:top-[55%] xl:right-[8vw]
                             `}
                       />
                     )}

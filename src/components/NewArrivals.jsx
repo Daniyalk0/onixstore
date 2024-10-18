@@ -18,24 +18,24 @@ function NewArrivals() {
 
 
   useEffect(() => {
-    if (!allProductsLoading) {
-      gsap.fromTo(
-        containerRef.current.querySelectorAll(".animate-me3"),
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1.2,
-          stagger: 0.2,
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "center bottom",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    }
-  }, []);
+
+    gsap.fromTo(
+      containerRef.current.querySelectorAll(".animate-me3"),
+      { opacity: 0, y: 50 }, 
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        scrollTrigger: {
+          trigger: containerRef.current, 
+          start: "center bottom", 
+          toggleActions: "play none none none",
+        },
+      }
+    );
+
+
+}, []); 
 
   const handleNavClick = (e) => {
     if (cartState) {
@@ -47,10 +47,10 @@ function NewArrivals() {
 
   return (
     <div
-      className="flex w-full justify-center items-center xl:mt-[0px] lg:py-8 bg-white  "
+      className="flex w-full justify-center items-center xl:mt-[0px] lg:py-8 bg-white"
       ref={containerRef}
     >
-      <div className="w-full px-4 py-14 xl:py-10 overflow-hidden lg:px-10 xl:px-14 max-w-[1600px]">
+      <div className="w-full px-4 py-14 xl:py-10 overflow-hidden lg:px-10 xl:px-14 max-w-[1600px] " >
         <div className="overflow-hidden">
           <h1 className="font-integral text-[5.5vw]  md:text-[5vw] lg:font-integral2 lg:text-[3vw] text-center xl:font-semibold xl:text-[2vw] animate-me3">
             new arrivals
