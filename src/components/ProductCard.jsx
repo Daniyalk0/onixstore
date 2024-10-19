@@ -30,7 +30,7 @@ function ProductCard({
 
       if (width >= 1280) {
 
-        maxLength = 35;
+        maxLength = 24;
       } else if (width >= 768) {
 
         maxLength = 16;

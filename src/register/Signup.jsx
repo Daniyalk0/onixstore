@@ -85,25 +85,6 @@ function Signup({ className, handleToggle }) {
       <h1 className="font-pop font-semibold  text-center text-[4vw] text-zinc-800 mt-3 xs:mt-[1.5vw]  md:text-start md:text-[3vw] xl:text-[1.5vw] xl:mt-[0.8vw] lg:mt-[0.6vw] transition-all duration-700 md:mt-[-4vw]">
         Create an account
       </h1>
-      {/* {isLogin && (
-        <div
-          className={`transition-all duration-500 w-full font-pop flex flex-col lg:gap-3 md:gap-3 gap-3`}
-        >
-          <button className="w-full h-full rounded-full border-[1px] border-zinc-400 flex items-center justify-center md:py-3  py-3 lg:text-[1vw] gap-2">
-            <FaFacebook className="text-[#1877F2] lg:text-[1.4vw]" />
-            <p>Log in with Facebook</p>
-          </button>
-          <button className="w-full h-full rounded-full border-[1px] border-zinc-400 flex items-center justify-center md:py-3   py-3 lg:text-[1vw] gap-2">
-            <FcGoogle className=" lg:text-[1.4vw]" />
-            <p>Log in with Google</p>
-          </button>
-          <div className="w-full flex items-center lg:mt-2 mt-4">
-            <div className="bg-zinc-300 w-[50%] lg:h-[0.05vw]" />
-            <p className="text-zinc-600 lg:text-[1vw] px-3">OR</p>
-            <div className="bg-zinc-300 w-[50%] lg:h-[0.05vw]" />
-          </div>
-        </div>
-      )} */}
       <Formik
         initialValues={{
           email: "",
@@ -185,7 +166,7 @@ function Signup({ className, handleToggle }) {
                   name="email"
                   type="email"
                   onBlur={handleBlur}
-                  className={`w-full xl:w-[80%] h-full md:py-[1vw] border-[1px]  py-2 rounded-md pl-2 text-[3vw] outline-none  transition-all duration-200 xs:py-[1.3vw] md:text-[1.9vw] xl:text-[1vw] xl:py-[0.5vw] bg-[#EBEEF0] ${
+                  className={`w-full xl:w-[80%] h-full md:py-[1vw] border-[1px]  py-2 rounded-md pl-2 text-[3vw] outline-none  transition-all duration-200 xs:py-[1.5vw] md:text-[1.9vw] xl:text-[1vw] xl:py-[0.5vw] bg-[#EBEEF0] ${
                     touched.email
                       ? errors.email
                         ? "border-red-500"
@@ -218,7 +199,7 @@ function Signup({ className, handleToggle }) {
                     id="password"
                     className={`${
                       isLogin ? "hidden" : "block"
-                    } relative xl:w-[80%] w-full h-full md:py-[1vw] border-[1px]  py-2 rounded-md pl-2 text-[3vw] outline-none  transition-all duration-200 xs:py-[1.3vw] md:text-[1.9vw] xl:text-[1vw] xl:py-[0.5vw] bg-[#EBEEF0]     ${
+                    } relative xl:w-[80%] w-full h-full md:py-[1vw] border-[1px]  py-2 rounded-md pl-2 text-[3vw] outline-none  transition-all duration-200 xs:py-[1.5vw] md:text-[1.9vw] xl:text-[1vw] xl:py-[0.5vw] bg-[#EBEEF0]     ${
                       !touched.password ? "border-zinc-300" : ""
                     }
                 ${touched.password && !values.password ? "border-red-500" : ""}

@@ -36,6 +36,7 @@ function AllProducts({}) {
   const [filteredData2, setfilteredData2] = useState([]);
   const path = useLocation();
   const [cleanedPath, setCleanedPath] = useState("");
+  const [clickedItem, setClickedItem] = useState('')
 
   const getItemsLimit = () => {
     const width = window.innerWidth;
@@ -227,12 +228,12 @@ function AllProducts({}) {
                       !isFiltered ? "blur brightness-75" : ""
                     }`}
                   >
-                    {addProductLoading[prod?.id] ? (
-                      <div className="flex justify-center items-center">
+                    {addProductLoading && clickedItem === prod?.id ? (
+                      <div     className={`absolute xl:left-[17vw] xl:top-[1vw] text-zinc-100 bg-[#dddddd] xl:p-[0.45vw] rounded-full flex items-center justify-center xl:text-[0.9vw] transition-all duration-200 lg:left-[18vw] lg:top-[4vw] md:left-[19vw] md:top-[3.4vw] md:text-[1.4vw] md:p-1 left-[36vw] top-[5vw] p-2 xs:left-[35vw] xs:top-[2.4vw] xs:text-[3vw] xs:p-[1.6vw]`}>
                         <ClipLoader
                           color="#000000"
                           loading={true}
-                          size={Math.min(20, window.innerWidth * 0.1)}
+                          size={Math.min(15, window.innerWidth * 0.1)}
                         />
                       </div>
                     ) : (
@@ -242,6 +243,7 @@ function AllProducts({}) {
                             console.log(prod?.img);
 
                             if (!prod?.isAvailable) {
+                              setClickedItem(prod?.id);
                               addProducts(prod?.img, prod);
                             } else {
                               alert("already added!");
@@ -250,12 +252,12 @@ function AllProducts({}) {
                             navigate("/auth");
                           }
                         }}
-                        className={`absolute xl:left-[17vw] xl:top-[1vw] text-zinc-100 bg-[#1a0f0f42] xl:p-[0.45vw] rounded-full flex items-center justify-center xl:text-[0.9vw] transition-all duration-200 lg:left-[18vw] lg:top-[4vw] md:left-[19vw] md:top-[3.4vw] md:text-[1.4vw] md:p-1 left-[36vw] top-[5vw] p-2 xs:left-[35vw] xs:top-[2.4vw] xs:text-[3vw] xs:p-[1.6vw]`}
+                        className={`absolute xl:left-[17vw] xl:top-[1vw] text-zinc-100 bg-[#dddddd] xl:p-[0.45vw] rounded-full flex items-center justify-center xl:text-[0.9vw] transition-all duration-200 lg:left-[18vw] lg:top-[4vw] md:left-[19vw] md:top-[3.4vw] md:text-[1.4vw] md:p-1 left-[36vw] top-[5vw] p-2 xs:left-[35vw] xs:top-[2.4vw] xs:text-[3vw] xs:p-[1.6vw]`}
                       >
                         {prod?.isAvailable ? (
-                          <IoCheckmarkDoneSharp className="text-green-700" />
+                          <IoCheckmarkDoneSharp className="text-zinc-900" />
                         ) : (
-                          <IoCartSharp />
+                          <IoCartSharp className="text-zinc-900"/>
                         )}
                       </button>
                     )}

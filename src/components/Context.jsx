@@ -103,7 +103,7 @@ export function MyProvider({ children }) {
 
   const addProducts = async (fileUrl, productToAdd) => {
 
-setAddProductLoading((prev) => ({...prev, [productToAdd] : true}))
+setAddProductLoading(true)
     const file = await confService.uploadFile(fileUrl);
     console.log("image", file);
 
@@ -130,7 +130,7 @@ setAddProductLoading((prev) => ({...prev, [productToAdd] : true}))
             horizontal: "right",
           },
         });
-        setAddProductLoading((prev) => ({...prev, [productToAdd] : false}))
+        setAddProductLoading(false)
         console.log(addProductLoading);
         
       }

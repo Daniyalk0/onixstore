@@ -62,6 +62,10 @@ function TopSelling() {
                 imgg={product[0].img} 
                 heading={product[0].name}
                 newPrice={product[0].price} 
+                className={'xxs:my-0 '}
+                classNamee={'xxs:h-[33vw]'} 
+                textClass={'xxs:text-[2.3vw]'}
+                priceClass={'text-[2.6vw] text-[2vw] lg:text-[1.4vw] xl:text-[1.2vw]'}
               />
             )}
           </NavLink>
@@ -73,6 +77,10 @@ function TopSelling() {
               imgg={product[12].img} 
               heading={product[12].name}
               newPrice={product[12].price} 
+              className={'xxs:my-0 '}
+              classNamee={'xxs:h-[33vw]'} 
+              textClass={'xxs:text-[2.3vw]'}
+              priceClass={'text-[2.6vw] text-[2vw] lg:text-[1.4vw] xl:text-[1.2vw]'}
             />
           )}
           </NavLink>
@@ -84,6 +92,10 @@ function TopSelling() {
               imgg={product[43].img}
               heading={product[43].name}
               newPrice={product[43].price} 
+              className={'xxs:my-0 '}
+              classNamee={'xxs:h-[33vw]'} 
+              textClass={'xxs:text-[2.3vw]'}
+              priceClass={'text-[2.6vw] text-[2vw] lg:text-[1.4vw] xl:text-[1.2vw]'}
             />
           )}
           </NavLink>
@@ -95,6 +107,10 @@ function TopSelling() {
               imgg={product[35].img} 
               heading={product[35].name}
               newPrice={product[35].price}
+              className={'xxs:my-0 '}
+              classNamee={'xxs:h-[33vw]'} 
+              textClass={'xxs:text-[2.3vw]'}
+              priceClass={'text-[2.6vw] text-[2vw] lg:text-[1.4vw] xl:text-[1.2vw]'}
             />
           )}
           </NavLink>

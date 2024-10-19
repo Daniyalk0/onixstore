@@ -202,7 +202,7 @@ function Hamburger() {
       <div
         className={`cart min-h-screen fixed  ${
           cartState ? "right-0" : "right-[-100vw]"
-        } w-[50vw] flex justify-center flex-col z-[1000] bg-white top-[0vw] transition-all duration-300 px-3 py-4 xs:py-8 xs:w-[58vw] xs:justify-between overflow-y-scroll`}
+        } w-[50vw] flex justify-center flex-col z-[1000] bg-white top-[0vw] transition-all duration-300 px-3 py-4 xs:py-8 xs:w-[58vw] xs:justify-between xxs:px-1`}
       >
         <div className="w-full flex  justify-between text-2xl font-semibold font-satoshi items-center">
           <h1>Cart</h1>
@@ -230,13 +230,13 @@ function Hamburger() {
                     }
                   }}
                 >
-                  <div className="flex items-center flex-col max-w-[120px] min-w-[120px]  xs:min-w-[80px] xs:max-w-[100px] ">
+                  <div className="flex items-center flex-col max-w-[120px] min-w-[120px]  xs:min-w-[80px] xs:max-w-[100px] xxs:items-start">
                     <img
                       src={
                         configService.getFilePreview(prod?.productImage).href
                       }
                       alt=""
-                      className={`h-[20vw] ${
+                      className={`h-[20vw] xxs:w-[25vw] xxs:h-[25vw] ${
                         itemsLoading && clickedItem === prod?.$id
                           ? "opacity-50 pointer-events-none"
                           : ""
@@ -335,9 +335,9 @@ function Hamburger() {
             <h1>no products </h1>
           )}
         </div>
-        <div className="w-full flex  justify-between text-xl font-semibold font-satoshi items-center mt-8">
-          <h1 className="">Sub Total:</h1>
-          <h1 className="">${subTotal?.toFixed(2)}</h1>
+        <div className="w-full flex  justify-between text-xl font-semibold font-satoshi items-center mt-8 xxs:mt-[-1vw]">
+          <h1 className="xxs:text-[4vw]">Sub Total:</h1>
+          <h1 className="xxs:text-[4vw]">${subTotal?.toFixed(2)}</h1>
         </div>
         <GlobalBtn
           onClick={() => setCartState(false)}
@@ -389,12 +389,12 @@ function Hamburger() {
         <IoSearch className={`w-[7vw] h-[4vh] `} onClick={handleSearchClick} />
         <div className={`${
               authStatus ? "block" : "hidden"
-            }`}>
+            } `}    onClick={() => {
+              setCartState(!cartState), console.log("cart");
+            }}>
           <LuShoppingCart
             className={`w-[7vw] h-[4vh] `}
-            onClick={() => {
-              setCartState(!cartState), console.log("cart");
-            }}
+         
           />
           <h2 className="absolute bg-black py-[0.2vw] px-2 rounded-full text-white left-[15vw] top-[-1.2vw] text-center font-semibold xs:text-[3vw] xs:left-[14.5vw] xs:top-[-1vw]">
             {" "}

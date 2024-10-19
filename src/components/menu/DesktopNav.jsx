@@ -196,9 +196,159 @@ function DesktopNav({ className }) {
           showNavbar ? "-translate-y-0" : "-translate-y-24"
         } transition-transform duration-300  md:px-8   `}
       >
-        <div
+    
+        <div className="h-3 flex items-center justify-between xl:w-[75%] 2xl:w-[73%] ">
+          <div className={` flex items-center md:gap-5`}>
+            <div
+              className={`logo uppercase font-integral text-[3.5vw] scale-y-400 transition-all duration-300 xl:text-[2.2vw] tracking-tight overflow-hidden`}
+            >
+              <h1 className="animate-me ">onixstore</h1>
+            </div>
+            <div
+              className={`itmes text-[2vw] font-satoshi font-light flex items-center gap-5 mx-2  md:mt-2 lg:gap-4 xl:gap-5 xl:text-[1.1vw] xl:font-extralight xl:ml-[30px] 2xl:text-[0.8vw] 2xl:ml-[30px]  nav-item ${
+                shopHidden ? "overflow-hidden" : ""
+              } `}
+            >
+              <NavLink to={"/"}>
+                <h1 className={`animate-me nav-link-wrapper `}>Home</h1>
+              </NavLink>
+              <div
+                className="flex items-center relative"
+                onMouseEnter={() => setIsShop(true)}
+                onMouseLeave={() => setIsShop(false)}
+              >
+                <h1
+                  className="flex items-center animate-me nav-link-wrapper w-full"
+                  onClick={() => setIsShop((prev) => !prev)}
+                >
+                  Shop
+                  <FaChevronDown
+                    className={`${
+                      isShop ? "rotate-180" : ""
+                    } transition-all duration-150 w-4`}
+                  />
+                </h1>
+                <div
+                  className={`${
+                    isShop ? "inline-block" : "hidden"
+                  } transition-all duration-200 py-2 px-2 bg-zinc-800 rounded-b-md absolute top-[95%] left-[-7%] text-zinc-200 text-[1.5vw] tracking-wide leading-loose xl:text-[0.9vw] xl:font-extralight xl:tracking-normal xl:left-[-0.8vw] z-[999]`}
+                >
+                  <NavLink
+                    to={"/Men's Sneaker"}
+                    onClick={() => setIsShop(false)}
+                  >
+                    <h2>Sneekers</h2>
+                  </NavLink>
+                  <NavLink to={"/Cap"} onClick={() => setIsShop(false)}>
+                    <h2>Caps</h2>
+                  </NavLink>
+                  <NavLink to={"/Men's Boot"} onClick={() => setIsShop(false)}>
+                    <h2>Boots</h2>
+                  </NavLink>
+                  <NavLink to={"/Bag"} onClick={() => setIsShop(false)}>
+                    <h2>Bags</h2>
+                  </NavLink>
+                </div>
+              </div>
+              <a href="/#about">
+                <h1 className="animate-me nav-link-wrapper w-full">About</h1>
+              </a>
+              <a href="/#subscribe">
+                <h1 className="animate-me nav-link-wrapper w-full">
+                  Subscribe
+                </h1>
+              </a>
+            </div>
+          </div>
+          <div className="search relative w-[25%] md:w-[30%] flex items-center border-none md:mt-2 xl:w-[23vw] 2xl:w-[19vw]  animate-me">
+            <input
+              type="text"
+              name=""
+              id=""
+              value={inputValue}
+              className="rounded-xl pl-7 text-zinc-700 w-full bg-[#EBEEF0] text-[2vw] placeholder:text-xs py-1 font-semibold xl:py-[1.2vh] xl:text-xs xl:font-semibold 2xl:py-[1.8vh] focus:outline-[#00000020] z-[999]"
+              placeholder="Search Product.."
+              onChange={(e) => InputChange(e.target.value)}
+            />
+            <CiSearch className="absolute left-2 text-zinc-600" />
+            <RxCross2
+              className={`absolute right-3 text-zinc-600 xl:text-xs ${
+                crossIcon ? "inline-block" : "hidden"
+              }`}
+              onClick={crossIconClick}
+            />
+            <div
+              className={`xl:w-[22vw] xl:h-[20vw] md:h-[30vw] md:px-0 md:gap-5 sm:gap-0 absolute sm:w-[22vw] sm:h-[35vw] sm:top-[3vw] sm:left-[0.1vw] xl:top-[2.4vw] xl:left-[0.5vw] bg-zinc-200 rounded-b-2xl overflow-y-auto px-3 py-3 overflow-x-hidden hide-scrollbar flex flex-col justify-start lg:h-[20vw] lg:top-[4vw] md:top-[4vw] md:w-[23vw] md:left-[1.3vw] lg:w-[25vw] items-center xl:gap-2 lg:gap-0 ${
+                searchProductsState ? "opacity-0" : "opacity-1"
+              } transition-all duration-200`}
+            >
+              {filteredProducts && filteredProducts.length > 0 ? (
+                filteredProducts.map((pro, index) => (
+                  <NavLink
+                    to={`/product-details/${pro?.id}`}
+                    onClick={() => {
+                      setsearchProductsState(true), setinputValue("");
+                    }}
+                  >
+                    <ProductCard
+                      key={index}
+                      heading={pro?.name}
+                      imgg={pro?.img}
+                      newPrice={pro?.price}
+                      ratingg={pro?.ratings}
+                      classNamee={
+                        "xl:min-w-[120px] xl:max-w-[120px] lg:min-w-[110px] lg:max-w-[110px] xl:h-[8vw] lg:h-[10vw] sm:h-[14.9vw] md:w-[90%]"
+                      }
+                      className={
+                        "flex sm:h-[20vw] sm:flex-col lg:px-0 xl:h-[10vw] lg:flex-row justify-between items-center sm:justify-center sm:items-center lg:w-full gap-0 lg:my-2 md:my-1 sm:w-[90%]"
+                      }
+                      textClass={"xl:text-xs lg:text-[1vw] md:text-[1.5vw]"}
+                      margin={
+                        "px-2 py-0 ml-0 md:mt-2 w-full xl:gap-0 md:flex justify-center items-center sm:mt-1 lg:items-start"
+                      }
+                      ratingClass={"xl:w-[4vw] lg:w-[6vw] lg:text-[1.5vw]"}
+                      priceClass={"xl:text-[0.8vw] lg:text-[1.1vw]"}
+                    />
+                  </NavLink>
+                ))
+              ) : (
+                <div className="no-results-message">No results found</div>
+              )}
+            </div>
+          </div>
+        </div>
+        <div className="h-3 flex items-center gap-3 md:mt-2 xl:gap-4 relative  animate-me">
+          <div
+            className={`${
+              authStatus ? "opacity-1" : "opacity-0"
+            } transition-all duration-300 cursor-pointer`}
+          >
+            <LuShoppingCart
+              className={`md:text-[2.6vw] xl:text-[1.5vw] 2xl:text-[1.3vw]`}
+              onClick={() => {
+                setCartState(!cartState), console.log("cart");
+              }}
+            />
+            <h2 className=" absolute bg-black px-[0.5vw] py-[0.2vw] rounded-full text-white font-semibold font-satoshi text-[0.6vw] top-[-1vw] left-[0.8vw] lg:left-[1.3vw] lg:top-[-1.7vw] lg:px-[0.7vw] lg:py-[0.3vw] text-center lg:text-[0.8vw] md:text-[0.9vw] md:left-[1.5vw] md:px-[0.7vw] sm:text-[1vw] sm:left-[1.3vw] sm:px-[0.7vw] xl:left-[0.7vw] xl:top-[-1vw] xl:text-[0.6vw] xl:px-[0.5vw] xl:py-[0.2vw]">
+              {allProducts?.length}
+            </h2>
+          </div>
+          <div onClick={logOutHandler}>
+            {authState && authStatus ? (
+              <PiSignOut
+                className={`md:text-[2.6vw] xl:text-[1.5vw] 2xl:text-[1.3vw] cursor-pointer`}
+              />
+            ) : (
+              <FaRegUserCircle
+                className={`md:text-[2.6vw] xl:text-[1.5vw] 2xl:text-[1.3vw] cursor-pointer`}
+              />
+            )}
+          </div>
+        </div>
+      </div>
+      <div
           className={`cart min-h-screen fixed bg-zinc-100  ${
-            cartState ? "right-0 lg:right-[-4vw] xl:right-0" : "right-[-100vw]"
+            cartState ? "right-0 lg:right-[-4vw] xl:right-0 top-0" : "right-[-100vw]"
           } w-[50vw] flex justify-center flex-col z-[1200] top-[0vw] transition-all duration-500 px-3 md:px-1 py-8 xs:py-8 xs:w-[56vw] xs:justify-between lg:px-4 xl:w-[35vw] xl:py-6 `}
         >
           <div className="w-full flex  justify-between text-2xl font-semibold font-satoshi items-center lg:text-[1vw] lg:uppercase">
@@ -366,155 +516,6 @@ function DesktopNav({ className }) {
             }
           />
         </div>
-        <div className="h-3 flex items-center justify-between xl:w-[75%] 2xl:w-[73%] ">
-          <div className={` flex items-center md:gap-5`}>
-            <div
-              className={`logo uppercase font-integral text-[3.5vw] scale-y-400 transition-all duration-300 xl:text-[2.2vw] tracking-tight overflow-hidden`}
-            >
-              <h1 className="animate-me ">onixstore</h1>
-            </div>
-            <div
-              className={`itmes text-[2vw] font-satoshi font-light flex items-center gap-5 mx-2  md:mt-2 lg:gap-4 xl:gap-5 xl:text-[1.1vw] xl:font-extralight xl:ml-[30px] 2xl:text-[0.8vw] 2xl:ml-[30px]  nav-item ${
-                shopHidden ? "overflow-hidden" : ""
-              } `}
-            >
-              <NavLink to={"/"}>
-                <h1 className={`animate-me nav-link-wrapper `}>Home</h1>
-              </NavLink>
-              <div
-                className="flex items-center relative"
-                onMouseEnter={() => setIsShop(true)}
-                onMouseLeave={() => setIsShop(false)}
-              >
-                <h1
-                  className="flex items-center animate-me nav-link-wrapper w-full"
-                  onClick={() => setIsShop((prev) => !prev)}
-                >
-                  Shop
-                  <FaChevronDown
-                    className={`${
-                      isShop ? "rotate-180" : ""
-                    } transition-all duration-150 w-4`}
-                  />
-                </h1>
-                <div
-                  className={`${
-                    isShop ? "inline-block" : "hidden"
-                  } transition-all duration-200 py-2 px-2 bg-zinc-800 rounded-b-md absolute top-[95%] left-[-7%] text-zinc-200 text-[1.5vw] tracking-wide leading-loose xl:text-[0.9vw] xl:font-extralight xl:tracking-normal xl:left-[-0.8vw] z-[999]`}
-                >
-                  <NavLink
-                    to={"/Men's Sneaker"}
-                    onClick={() => setIsShop(false)}
-                  >
-                    <h2>Sneekers</h2>
-                  </NavLink>
-                  <NavLink to={"/Cap"} onClick={() => setIsShop(false)}>
-                    <h2>Caps</h2>
-                  </NavLink>
-                  <NavLink to={"/Men's Boot"} onClick={() => setIsShop(false)}>
-                    <h2>Boots</h2>
-                  </NavLink>
-                  <NavLink to={"/Bag"} onClick={() => setIsShop(false)}>
-                    <h2>Bags</h2>
-                  </NavLink>
-                </div>
-              </div>
-              <a href="/#about">
-                <h1 className="animate-me nav-link-wrapper w-full">About</h1>
-              </a>
-              <a href="/#subscribe">
-                <h1 className="animate-me nav-link-wrapper w-full">
-                  Subscribe
-                </h1>
-              </a>
-            </div>
-          </div>
-          <div className="search relative w-[25%] md:w-[30%] flex items-center border-none md:mt-2 xl:w-[23vw] 2xl:w-[19vw]  animate-me">
-            <input
-              type="text"
-              name=""
-              id=""
-              value={inputValue}
-              className="rounded-xl pl-7 text-zinc-700 w-full bg-[#EBEEF0] text-[2vw] placeholder:text-xs py-1 font-semibold xl:py-[1.2vh] xl:text-xs xl:font-semibold 2xl:py-[1.8vh] focus:outline-[#00000020] z-[999]"
-              placeholder="Search Product.."
-              onChange={(e) => InputChange(e.target.value)}
-            />
-            <CiSearch className="absolute left-2 text-zinc-600" />
-            <RxCross2
-              className={`absolute right-3 text-zinc-600 xl:text-xs ${
-                crossIcon ? "inline-block" : "hidden"
-              }`}
-              onClick={crossIconClick}
-            />
-            <div
-              className={`xl:w-[22vw] xl:h-[20vw] md:h-[30vw] md:px-0 md:gap-5 sm:gap-0 absolute sm:w-[22vw] sm:h-[35vw] sm:top-[3vw] sm:left-[0.1vw] xl:top-[2.4vw] xl:left-[0.5vw] bg-zinc-200 rounded-b-2xl overflow-y-auto px-3 py-3 overflow-x-hidden hide-scrollbar flex flex-col justify-start lg:h-[20vw] lg:top-[4vw] md:top-[4vw] md:w-[23vw] md:left-[1.3vw] lg:w-[25vw] items-center xl:gap-2 lg:gap-0 ${
-                searchProductsState ? "opacity-0" : "opacity-1"
-              } transition-all duration-200`}
-            >
-              {filteredProducts && filteredProducts.length > 0 ? (
-                filteredProducts.map((pro, index) => (
-                  <NavLink
-                    to={`/product-details/${pro?.id}`}
-                    onClick={() => {
-                      setsearchProductsState(true), setinputValue("");
-                    }}
-                  >
-                    <ProductCard
-                      key={index}
-                      heading={pro?.name}
-                      imgg={pro?.img}
-                      newPrice={pro?.price}
-                      ratingg={pro?.ratings}
-                      classNamee={
-                        "xl:min-w-[120px] xl:max-w-[120px] lg:min-w-[110px] lg:max-w-[110px] xl:h-[8vw] lg:h-[10vw] sm:h-[14.9vw] md:w-[90%]"
-                      }
-                      className={
-                        "flex sm:h-[20vw] sm:flex-col lg:px-0 xl:h-[10vw] lg:flex-row justify-between items-center sm:justify-center sm:items-center lg:w-full gap-0 lg:my-2 md:my-1 sm:w-[90%]"
-                      }
-                      textClass={"xl:text-xs lg:text-[1vw] md:text-[1.5vw]"}
-                      margin={
-                        "px-2 py-0 ml-0 md:mt-2 w-full xl:gap-0 md:flex justify-center items-center sm:mt-1 lg:items-start"
-                      }
-                      ratingClass={"xl:w-[4vw] lg:w-[6vw] lg:text-[1.5vw]"}
-                      priceClass={"xl:text-[0.8vw] lg:text-[1.1vw]"}
-                    />
-                  </NavLink>
-                ))
-              ) : (
-                <div className="no-results-message">No results found</div>
-              )}
-            </div>
-          </div>
-        </div>
-        <div className="h-3 flex items-center gap-3 md:mt-2 xl:gap-4 relative  animate-me">
-          <div
-            className={`${
-              authStatus ? "opacity-1" : "opacity-0"
-            } transition-all duration-300 cursor-pointer`}
-          >
-            <LuShoppingCart
-              className={`md:text-[2.6vw] xl:text-[1.5vw] 2xl:text-[1.3vw]`}
-              onClick={() => {
-                setCartState(!cartState), console.log("cart");
-              }}
-            />
-            <h2 className=" absolute bg-black px-[0.5vw] py-[0.2vw] rounded-full text-white font-semibold font-satoshi text-[0.6vw] top-[-1vw] left-[0.8vw] lg:left-[1.3vw] lg:top-[-1.7vw] lg:px-[0.7vw] lg:py-[0.3vw] text-center lg:text-[0.8vw] md:text-[0.9vw] md:left-[1.5vw] md:px-[0.7vw] sm:text-[1vw] sm:left-[1.3vw] sm:px-[0.7vw] xl:left-[0.7vw] xl:top-[-1vw] xl:text-[0.6vw] xl:px-[0.5vw] xl:py-[0.2vw]">
-              {allProducts?.length}
-            </h2>
-          </div>
-          <div onClick={logOutHandler}>
-            {authState && authStatus ? (
-              <PiSignOut
-                className={`md:text-[2.6vw] xl:text-[1.5vw] 2xl:text-[1.3vw] cursor-pointer`}
-              />
-            ) : (
-              <FaRegUserCircle
-                className={`md:text-[2.6vw] xl:text-[1.5vw] 2xl:text-[1.3vw] cursor-pointer`}
-              />
-            )}
-          </div>
-        </div>
-      </div>
     </Container>
   );
 }

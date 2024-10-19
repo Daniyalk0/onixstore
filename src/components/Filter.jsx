@@ -98,9 +98,9 @@ function Filter({ className, setFiltered2, datad }) {
     <div
       className={`${className} ${
         animate ? "opacity-0 md:opacity-100" : "opacity-1"
-      }   z-[999] xs:z-[999] md:z-0 transition-all duration-500 w-full  xs:left-0   md:min-h-[875px] xl:min-h-[600px] min-h-screen xs:min-h-screen xs:top-[26vw] lg:min-h-[930px]  px-8 py-8  bg-zinc-100  absolute  md:relative left-0 md:w-[20vw] overflow-y-auto   ${
+      }   z-[1000] xs:z-[999] md:z-0 transition-all duration-500 w-full  xs:left-0   md:min-h-[875px] xl:min-h-[600px] min-h-screen xs:min-h-screen xs:top-[26vw] lg:min-h-[930px]  px-8 py-8  bg-zinc-100  absolute  md:relative left-0 md:w-[20vw] overflow-y-auto    ${
         value
-          ? "top-[-16vw] xs:top-[-24.1vw] md:top-0 "
+          ? "top-[-16vw] xs:top-[-26.1vw] md:top-0 xxs:top-[-26vw]"
           : "top-[95vh]  md:top-0 xs:top-[80vh] "
       } md:px-0 md:pl-3 lg:px-0 xl:px-2 md:py-2 lg:mr-5 lg:mt-7`}
     >

@@ -110,7 +110,7 @@ function About({ scrollref }) {
             className="  w-[100%] xs:w-[90%] xl:w-[50%] flex xxs:w-[85%] md:w-[70%] xl:mb-[3vw] "
             ref={containerRef}
           >
-            <p className="text-[3vw] pacifico-regular text-justify md:text-[2vw] xl:leading-9 " ref={textRef}>
+            <p className="text-[3vw] font-pop font-semibold text-justify md:text-[2vw] xl:leading-9 " ref={textRef}>
               OnixStore is an e-commerce platform specializing in stylish
               sneakers, caps, bags, and boots. It offers a seamless shopping
               experience for fashion enthusiasts. Shoppers can easily browse
