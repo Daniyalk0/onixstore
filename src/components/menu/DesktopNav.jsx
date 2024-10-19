@@ -34,6 +34,7 @@ function DesktopNav({ className }) {
   const [clickedItem, setClickedItem] = useState("");
 
   const [shopHidden, setShopHidden] = useState(true);
+  const [logOutLoading, setLogOutLoading] = useState(false);
 
   const {
     cartState,
@@ -91,15 +92,26 @@ function DesktopNav({ className }) {
   };
 
   function logOutHandler() {
+    setLogOutLoading(true); 
     if (authStatus) {
-      service.logOut().then(() => {
-        logout();
-        navigate("/auth");
-      });
+      service.logOut()
+        .then((d) => {
+          setLogOutLoading(false); 
+          logout();
+          navigate("/auth");
+        })
+        .catch((error) => {
+          console.error("Log out failed", error);
+          setLogOutLoading(false); 
+        });
     } else {
+      setLogOutLoading(false); 
       navigate("/auth");
     }
   }
+  
+
+  
 
   const crossIconClick = () => {
     setinputValue("");
@@ -153,23 +165,21 @@ function DesktopNav({ className }) {
     calculateSubtotal();
   }, [allProducts]);
 
-
   useEffect(() => {
-    const animateMeCart = document.querySelectorAll('.animateMe')
-        gsap.fromTo(
-          animateMeCart,
-          {
-            opacity: 0,
-            x: 100,
-          },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.8,
-            delay: 0.3,
-          }
-        );
-      
+    const animateMeCart = document.querySelectorAll(".animateMe");
+    gsap.fromTo(
+      animateMeCart,
+      {
+        opacity: 0,
+        x: 100,
+      },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 0.8,
+        delay: 0.3,
+      }
+    );
   }, [cartState]);
 
   useEffect(() => {
@@ -196,7 +206,6 @@ function DesktopNav({ className }) {
           showNavbar ? "-translate-y-0" : "-translate-y-24"
         } transition-transform duration-300  md:px-8   `}
       >
-    
         <div className="h-3 flex items-center justify-between xl:w-[75%] 2xl:w-[73%] ">
           <div className={` flex items-center md:gap-5`}>
             <div
@@ -334,7 +343,15 @@ function DesktopNav({ className }) {
             </h2>
           </div>
           <div onClick={logOutHandler}>
-            {authState && authStatus ? (
+            {logOutLoading ? (
+              <div className="flex justify-center items-center md:w-[2.6vw] xl:w-[1.5vw] 2xl:w-[1.3vw] cursor-pointer">
+                <ClipLoader
+                  color="#000000"
+                  loading={true}
+                  size={Math.min(15, window.innerWidth * 0.1)}
+                />
+              </div>
+            ) : authState && authStatus ? (
               <PiSignOut
                 className={`md:text-[2.6vw] xl:text-[1.5vw] 2xl:text-[1.3vw] cursor-pointer`}
               />
@@ -347,175 +364,176 @@ function DesktopNav({ className }) {
         </div>
       </div>
       <div
-          className={`hidden sm:block cart min-h-screen fixed bg-zinc-100  ${
-            cartState ? "right-0 lg:right-[-4vw] xl:right-0 top-0" : "right-[-100vw]"
-          } w-[50vw] flex justify-center flex-col z-[1200] top-[0vw] transition-all duration-500 px-3 md:px-1 py-8 xs:py-8 xs:w-[56vw] xs:justify-between lg:px-4 xl:w-[35vw] xl:py-6 `}
-        >
-          <div className="w-full flex  justify-between text-2xl font-semibold font-satoshi items-center lg:text-[1vw] lg:uppercase">
-            <h1>Cart</h1>
-            <RxCross2
-              className="cursor-pointer"
-              onClick={() => setCartState(false)}
-            />
-          </div>
-          <div className="overflow-y-auto max-h-[70vh] w-full mt-[6vw] flex flex-col items-center  min-h-[70vh] gap-0  xs:gap-3 md:gap-3 xl:px-0  xl:mt-[1vw] overflow-x-hidden">
-            {allProducts?.length > 0 ? (
-              allProducts?.map((prod, index) => (
-                <div
-                  className="flex w-full justify-between items-center  px-2 border-b-[1px] border-zinc-400 xs:px-0  xl:px-0 animateMe"
-                  key={prod?.id}
-
+        className={`hidden sm:block cart min-h-screen fixed bg-zinc-100  ${
+          cartState
+            ? "right-0 lg:right-[-4vw] xl:right-0 top-0"
+            : "right-[-100vw]"
+        } w-[50vw] flex justify-center flex-col z-[1200] top-[0vw] transition-all duration-500 px-3 md:px-1 py-8 xs:py-8 xs:w-[56vw] xs:justify-between lg:px-4 xl:w-[35vw] xl:py-6 `}
+      >
+        <div className="w-full flex  justify-between text-2xl font-semibold font-satoshi items-center lg:text-[1vw] lg:uppercase">
+          <h1>Cart</h1>
+          <RxCross2
+            className="cursor-pointer"
+            onClick={() => setCartState(false)}
+          />
+        </div>
+        <div className="overflow-y-auto max-h-[70vh] w-full mt-[6vw] flex flex-col items-center  min-h-[70vh] gap-0  xs:gap-3 md:gap-3 xl:px-0  xl:mt-[1vw] overflow-x-hidden">
+          {allProducts?.length > 0 ? (
+            allProducts?.map((prod, index) => (
+              <div
+                className="flex w-full justify-between items-center  px-2 border-b-[1px] border-zinc-400 xs:px-0  xl:px-0 animateMe"
+                key={prod?.id}
+              >
+                <NavLink
+                  to={`/product-details/${prod?.productId}`}
+                  className={`flex justify-start items-start relative max-w-[120px] min-w-[120px] ml-0`}
+                  key={index}
+                  onClick={(e) => {
+                    if (itemsLoading) {
+                      e.preventDefault(); // Prevent navigation if items are still loading
+                    }
+                  }}
                 >
-                  <NavLink
-                    to={`/product-details/${prod?.productId}`}
-                    className={`flex justify-start items-start relative max-w-[120px] min-w-[120px] ml-0`}
+                  <div
+                    className={`flex items-center flex-col max-w-[120px] min-w-[120px] xs:min-w-[80px] xs:max-w-[100px] md:flex-row md:min-w-[140px] md:max-w-[140px] lg:min-w-[160px] lg:max-w-[160px] xl:min-w-[100px] xl:max-w-[100px] `}
                     key={index}
-                    onClick={(e) => {
-                      if (itemsLoading) {
-                        e.preventDefault(); // Prevent navigation if items are still loading
-                      }
-                    }}
                   >
-                    <div
-                      className={`flex items-center flex-col max-w-[120px] min-w-[120px] xs:min-w-[80px] xs:max-w-[100px] md:flex-row md:min-w-[140px] md:max-w-[140px] lg:min-w-[160px] lg:max-w-[160px] xl:min-w-[100px] xl:max-w-[100px] `}
-                      key={index}
-                    >
-                      <img
-                        src={
-                          configService.getFilePreview(prod?.productImage).href
-                        }
-                        alt=""
-                        className={`h-[20vw] lg:h-[17vw] xl:h-[7vw] ${
+                    <img
+                      src={
+                        configService.getFilePreview(prod?.productImage).href
+                      }
+                      alt=""
+                      className={`h-[20vw] lg:h-[17vw] xl:h-[7vw] ${
+                        itemsLoading && clickedItem === prod?.$id
+                          ? "opacity-50 pointer-events-none"
+                          : ""
+                      }`}
+                    />
+                    <div className="mt-2 w-full flex flex-col items-start md:gap-10 md:ml-2 md:mt-5 lg:gap-7 xl:gap-3">
+                      <h2
+                        className={`capitalize font-satoshi font-semibold leading-5 text-[2.6vw] xs:leading-4 md:text-[2vw]  lg:w-[25vw] xl:text-[1vw] xl:w-[20vw] ${
                           itemsLoading && clickedItem === prod?.$id
                             ? "opacity-50 pointer-events-none"
                             : ""
                         }`}
-                      />
-                      <div className="mt-2 w-full flex flex-col items-start md:gap-10 md:ml-2 md:mt-5 lg:gap-7 xl:gap-3">
+                      >
+                        {prod?.productName}{" "}
+                      </h2>
+                      <div
+                        className={`quantity border-[1px] border-zinc-300  xl:w-[5vw] lg:w-[12vw] items-center justify-center px-0 py-[0.6vw]  xs:py-2 md:gap-8  xs:gap-4 bg-[#EBEEF0]  gap-5 hidden md:flex xl:py-1 xl:gap-2 xl:justify-between ${
+                          itemsLoading && clickedItem === prod?.$id
+                            ? "opacity-50 pointer-events-none"
+                            : ""
+                        }`}
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        {decreaseQuantityLoading[prod.$id] ? (
+                          <div className="flex justify-center items-center">
+                            <ClipLoader
+                              color="#000000"
+                              loading={true}
+                              size={Math.min(15, window.innerWidth * 0.1)}
+                            />
+                          </div>
+                        ) : (
+                          <FaMinus
+                            className="text-[2vw] md:text-[3vw] lg:text-[2.5vw] xl:text-[0.8vw] xl:w-[1vw] md:w-[2vw]  xs:text-[3vw]"
+                            onClick={(event) => {
+                              if (!itemsLoading) {
+                                if (prod.productQuantity === 1) {
+                                  removeProduct(prod?.productImage, prod?.$id);
+                                }
+                                event.preventDefault(); // Prevent navigation
+                                decreaseQuantity(prod?.$id); // Call your decreaseQuantity function
+                              }
+                            }}
+                          />
+                        )}
                         <h2
-                          className={`capitalize font-satoshi font-semibold leading-5 text-[2.6vw] xs:leading-4 md:text-[2vw]  lg:w-[25vw] xl:text-[1vw] xl:w-[20vw] ${
+                          className={`font-satoshi font-semibold text-[2.6vw] md:text-[3vw] lg:text-[2vw] xl:text-[0.9vw] w-[1vw] text-center ${
                             itemsLoading && clickedItem === prod?.$id
                               ? "opacity-50 pointer-events-none"
                               : ""
                           }`}
                         >
-                          {prod?.productName}{" "}
+                          {prod?.productQuantity}
                         </h2>
-                        <div
-                          className={`quantity border-[1px] border-zinc-300  xl:w-[5vw] lg:w-[12vw] items-center justify-center px-0 py-[0.6vw]  xs:py-2 md:gap-8  xs:gap-4 bg-[#EBEEF0]  gap-5 hidden md:flex xl:py-1 xl:gap-2 xl:justify-between ${
-                            itemsLoading && clickedItem === prod?.$id
-                              ? "opacity-50 pointer-events-none"
-                              : ""
-                          }`}
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          {decreaseQuantityLoading[prod.$id] ? (
-                            <div className="flex justify-center items-center">
-                              <ClipLoader
-                                color="#000000"
-                                loading={true}
-                                size={Math.min(15, window.innerWidth * 0.1)}
-                              />
-                            </div>
-                          ) : (
-                            <FaMinus
-                              className="text-[2vw] md:text-[3vw] lg:text-[2.5vw] xl:text-[0.8vw] xl:w-[1vw] md:w-[2vw]  xs:text-[3vw]"
-                              onClick={(event) => {
-                                if (!itemsLoading) {
-                                  if (prod.productQuantity === 1) {
-                                    removeProduct(prod?.productImage, prod?.$id);
-                                  }
-                                  event.preventDefault(); // Prevent navigation
-                                  decreaseQuantity(prod?.$id); // Call your decreaseQuantity function
-                                }
-                              }}
+                        {increaseQuantityLoading[prod?.$id] ? (
+                          <div className="flex justify-center items-center">
+                            <ClipLoader
+                              color="#000000"
+                              loading={true}
+                              size={Math.min(15, window.innerWidth * 0.1)}
                             />
-                          )}
-                          <h2
-                            className={`font-satoshi font-semibold text-[2.6vw] md:text-[3vw] lg:text-[2vw] xl:text-[0.9vw] w-[1vw] text-center ${
-                              itemsLoading && clickedItem === prod?.$id
-                                ? "opacity-50 pointer-events-none"
-                                : ""
-                            }`}
-                          >
-                            {prod?.productQuantity}
-                          </h2>
-                          {increaseQuantityLoading[prod?.$id] ? (
-                            <div className="flex justify-center items-center">
-                              <ClipLoader
-                                color="#000000"
-                                loading={true}
-                                size={Math.min(15, window.innerWidth * 0.1)}
-                              />
-                            </div>
-                          ) : (
-                            <FaPlus
-                              className="text-[2vw] md:text-[3vw] lg:text-[2.5vw] xl:text-[0.8vw] xl:w-[1vw] md:w-[2vw] xs:text-[3vw]"
-                              // onClick={() => setProductQuantity((prev) => prev + 1)}
-                              onClick={() => {
-                                if (!itemsLoading) {
-                                  IncreaseQuantity(prod?.$id, 1);
-                                }
-                              }}
-                            />
-                          )}
-                        </div>
+                          </div>
+                        ) : (
+                          <FaPlus
+                            className="text-[2vw] md:text-[3vw] lg:text-[2.5vw] xl:text-[0.8vw] xl:w-[1vw] md:w-[2vw] xs:text-[3vw]"
+                            // onClick={() => setProductQuantity((prev) => prev + 1)}
+                            onClick={() => {
+                              if (!itemsLoading) {
+                                IncreaseQuantity(prod?.$id, 1);
+                              }
+                            }}
+                          />
+                        )}
                       </div>
                     </div>
-                  </NavLink>
-                  <div className="flex justify-between items-end flex-col  text-[2.6vw] gap-10 py-6 xs:py-2 xs:gap-6 md:gap-11 xl:gap-7">
-                    <RxCrossCircled
-                      className="font-semibold font-satoshi text-[5vw] lg:text-[3vw] xl:text-[1.4vw] text-zinc-500"
-                      onClick={(e) => {
-                        e.stopPropagation(); // Ensure this prevents NavLink from activating
-                        setClickedItem(prod?.$id);
-                        removeProduct(prod?.productImage, prod?.$id);
-                      }}
-                    />
-                    <div className="quantity border-[2px] border-zinc-800  xl:w-[20vw] lg:w-[0vw]  flex items-center justify-center px-0 py-[0.6vw]  xs:py-2 md:gap-8 xl:gap-5 xs:gap-4 bg-[#EBEEF0] xl:py-3 gap-5 md:hidden ">
-                      <FaMinus
-                        className="text-[2vw] md:text-[3vw] lg:text-[2.5vw] xl:text-[1.5vw] xl:w-[1vw] md:w-[2vw]  xs:text-[3vw]"
-                        // onClick={() =>
-                        //   setProductQuantity((prev) => {
-                        //     if (prev > 1) {
-                        //       return prev - 1;
-                        //     } else {
-                        //       return prev; // Or you can return 1 to ensure it never goes below 1
-                        //     }
-                        //   })
-                        // }
-                      />
-                      <h2 className="font-satoshi font-semibold text-[2.6vw] md:text-[3vw] lg:text-[2vw] xl:text-[1vw] w-[1vw] "></h2>
-                      <FaPlus
-                        className="text-[2vw] md:text-[3vw] lg:text-[2.5vw] xl:text-[1.5vw] xl:w-[1vw] md:w-[2vw] xs:text-[3vw]"
-                        // onClick={() => setProductQuantity((prev) => prev + 1)}
-                        onClick={() => IncreaseQuantity(prod, 1)}
-                      />
-                    </div>
-                    <h2 className="font-semibold font-satoshi text-zinc-500 lg:text-[1.8vw] xl:text-[1vw] ">
-                      ${prod?.productPrice}.00
-                    </h2>
                   </div>
+                </NavLink>
+                <div className="flex justify-between items-end flex-col  text-[2.6vw] gap-10 py-6 xs:py-2 xs:gap-6 md:gap-11 xl:gap-7">
+                  <RxCrossCircled
+                    className="font-semibold font-satoshi text-[5vw] lg:text-[3vw] xl:text-[1.4vw] text-zinc-500"
+                    onClick={(e) => {
+                      e.stopPropagation(); // Ensure this prevents NavLink from activating
+                      setClickedItem(prod?.$id);
+                      removeProduct(prod?.productImage, prod?.$id);
+                    }}
+                  />
+                  <div className="quantity border-[2px] border-zinc-800  xl:w-[20vw] lg:w-[0vw]  flex items-center justify-center px-0 py-[0.6vw]  xs:py-2 md:gap-8 xl:gap-5 xs:gap-4 bg-[#EBEEF0] xl:py-3 gap-5 md:hidden ">
+                    <FaMinus
+                      className="text-[2vw] md:text-[3vw] lg:text-[2.5vw] xl:text-[1.5vw] xl:w-[1vw] md:w-[2vw]  xs:text-[3vw]"
+                      // onClick={() =>
+                      //   setProductQuantity((prev) => {
+                      //     if (prev > 1) {
+                      //       return prev - 1;
+                      //     } else {
+                      //       return prev; // Or you can return 1 to ensure it never goes below 1
+                      //     }
+                      //   })
+                      // }
+                    />
+                    <h2 className="font-satoshi font-semibold text-[2.6vw] md:text-[3vw] lg:text-[2vw] xl:text-[1vw] w-[1vw] "></h2>
+                    <FaPlus
+                      className="text-[2vw] md:text-[3vw] lg:text-[2.5vw] xl:text-[1.5vw] xl:w-[1vw] md:w-[2vw] xs:text-[3vw]"
+                      // onClick={() => setProductQuantity((prev) => prev + 1)}
+                      onClick={() => IncreaseQuantity(prod, 1)}
+                    />
+                  </div>
+                  <h2 className="font-semibold font-satoshi text-zinc-500 lg:text-[1.8vw] xl:text-[1vw] ">
+                    ${prod?.productPrice}.00
+                  </h2>
                 </div>
-              ))
-            ) : (
-              <h1>no products </h1>
-            )}
-          </div>
-          <div className="w-full flex  justify-between text-xl font-semibold font-satoshi items-center mt-8 md:mt-0 xl:text-[1vw]">
-            <h1 className="">Sub Total:</h1>
-            <h1 className="">${subTotal?.toFixed(2)}</h1>
-          </div>
-
-          <GlobalBtn
-            onClick={() => setCartState(false)}
-            text={"view cart"}
-            route={"/CartPage"}
-            className={
-              "w-full h-11 text-[3vw] mt-12 xs:mt-6 md:h-14 md:mt-8 xl:h-9 xl:text-[1vw]"
-            }
-          />
+              </div>
+            ))
+          ) : (
+            <h1>no products </h1>
+          )}
         </div>
+        <div className="w-full flex  justify-between text-xl font-semibold font-satoshi items-center mt-8 md:mt-0 xl:text-[1vw]">
+          <h1 className="">Sub Total:</h1>
+          <h1 className="">${subTotal?.toFixed(2)}</h1>
+        </div>
+
+        <GlobalBtn
+          onClick={() => setCartState(false)}
+          text={"view cart"}
+          route={"/CartPage"}
+          className={
+            "w-full h-11 text-[3vw] mt-12 xs:mt-6 md:h-14 md:mt-8 xl:h-9 xl:text-[1vw]"
+          }
+        />
+      </div>
     </Container>
   );
 }
