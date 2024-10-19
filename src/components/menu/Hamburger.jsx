@@ -211,7 +211,7 @@ function Hamburger() {
             onClick={() => setCartState(false)}
           />
         </div>
-        <div className="overflow-y-auto max-h-[70vh] w-full mt-[6vw] flex flex-col items-center  min-h-[70vh] gap-0  xs:gap-3">
+        <div className="overflow-y-auto max-h-[70vh] w-full mt-[6vw] flex flex-col items-center  min-h-[70vh] gap-0  xs:gap-3 xxs:max-h-[50vh]">
           {allProducts?.length > 0 ? (
             allProducts?.map((prod, index) => (
               <div
@@ -335,7 +335,7 @@ function Hamburger() {
             <h1>no products </h1>
           )}
         </div>
-        <div className="w-full flex  justify-between text-xl font-semibold font-satoshi items-center mt-8 xxs:mt-[-1vw]">
+        <div className="w-full flex  justify-between text-xl font-semibold font-satoshi items-center mt-8 xxs:mt-[-4.5vw]">
           <h1 className="xxs:text-[4vw]">Sub Total:</h1>
           <h1 className="xxs:text-[4vw]">${subTotal?.toFixed(2)}</h1>
         </div>
@@ -343,7 +343,7 @@ function Hamburger() {
           onClick={() => setCartState(false)}
           text={"view cart"}
           route={"/cartPage"}
-          className={"w-full h-11 text-[3vw] mt-12 xs:mt-6"}
+          className={"w-full h-11 text-[3vw] mt-12 xs:mt-6 xxs:mb-[3vw]"}
         />
       </div>
 
