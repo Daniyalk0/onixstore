@@ -347,7 +347,7 @@ function DesktopNav({ className }) {
         </div>
       </div>
       <div
-          className={`cart min-h-screen fixed bg-zinc-100  ${
+          className={`hidden sm:block cart min-h-screen fixed bg-zinc-100  ${
             cartState ? "right-0 lg:right-[-4vw] xl:right-0 top-0" : "right-[-100vw]"
           } w-[50vw] flex justify-center flex-col z-[1200] top-[0vw] transition-all duration-500 px-3 md:px-1 py-8 xs:py-8 xs:w-[56vw] xs:justify-between lg:px-4 xl:w-[35vw] xl:py-6 `}
         >

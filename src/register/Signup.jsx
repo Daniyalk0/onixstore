@@ -166,7 +166,7 @@ function Signup({ className, handleToggle }) {
                   name="email"
                   type="email"
                   onBlur={handleBlur}
-                  className={`w-full xl:w-[80%] h-full md:py-[1vw] border-[1px]  py-2 rounded-md pl-2 text-[3vw] outline-none  transition-all duration-200 xs:py-[1.5vw] md:text-[1.9vw] xl:text-[1vw] xl:py-[0.5vw] bg-[#EBEEF0] ${
+                  className={`w-full xl:w-[80%] h-full md:py-[1vw] border-[1px]  py-2 rounded-md pl-2 text-[3vw] outline-none  transition-all duration-200 xs:py-[1.5vw] md:text-[1.9vw] xl:text-[1vw] xl:py-[0.5vw] bg-[#EBEEF0] xxs:py-[2.5vw]  ${
                     touched.email
                       ? errors.email
                         ? "border-red-500"
@@ -199,7 +199,7 @@ function Signup({ className, handleToggle }) {
                     id="password"
                     className={`${
                       isLogin ? "hidden" : "block"
-                    } relative xl:w-[80%] w-full h-full md:py-[1vw] border-[1px]  py-2 rounded-md pl-2 text-[3vw] outline-none  transition-all duration-200 xs:py-[1.5vw] md:text-[1.9vw] xl:text-[1vw] xl:py-[0.5vw] bg-[#EBEEF0]     ${
+                    } relative xl:w-[80%] w-full h-full md:py-[1vw] border-[1px]  py-2 rounded-md pl-2 text-[3vw] outline-none  transition-all duration-200 xs:py-[1.5vw] md:text-[1.9vw] xl:text-[1vw] xl:py-[0.5vw] bg-[#EBEEF0]  xxs:py-[2.5vw]    ${
                       !touched.password ? "border-zinc-300" : ""
                     }
                 ${touched.password && !values.password ? "border-red-500" : ""}
