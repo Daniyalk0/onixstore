@@ -25,6 +25,7 @@ function Hamburger() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showSearch, setShowSearch] = useState(false);
   const navigate = useNavigate();
+  const [logOutLoading, setLogOutLoading] = useState(false);
 
   const {
     cartState,
@@ -79,12 +80,21 @@ function Hamburger() {
   };
 
   function logOutHandler() {
+    setLogOutLoading(true);
     if (authStatus) {
-      service.logOut().then(() => {
-        logout();
-        navigate("/auth");
-      });
+      service
+        .logOut()
+        .then((d) => {
+          setLogOutLoading(false);
+          logout();
+          navigate("/auth");
+        })
+        .catch((error) => {
+          console.error("Log out failed", error);
+          setLogOutLoading(false);
+        });
     } else {
+      setLogOutLoading(false);
       navigate("/auth");
     }
   }
@@ -387,22 +397,28 @@ function Hamburger() {
         } transition-all duration-200 animate-me `}
       >
         <IoSearch className={`w-[7vw] h-[4vh] `} onClick={handleSearchClick} />
-        <div className={`${
-              authStatus ? "block" : "hidden"
-            } `}    onClick={() => {
-              setCartState(!cartState), console.log("cart");
-            }}>
-          <LuShoppingCart
-            className={`w-[7vw] h-[4vh] `}
-         
-          />
+        <div
+          className={`${authStatus ? "block" : "hidden"} `}
+          onClick={() => {
+            setCartState(!cartState), console.log("cart");
+          }}
+        >
+          <LuShoppingCart className={`w-[7vw] h-[4vh] `} />
           <h2 className="absolute bg-black py-[0.2vw] px-2 rounded-full text-white left-[15vw] top-[-1.2vw] text-center font-semibold xs:text-[3vw] xs:left-[14.5vw] xs:top-[-1vw]">
             {" "}
             {allProducts?.length}
           </h2>
         </div>
         <div onClick={logOutHandler}>
-          {authState && authStatus ? (
+          {logOutLoading ? (
+            <div className="flex justify-center items-center w-[9vw] h-[7vw]">
+              <ClipLoader
+                color="#000000"
+                loading={true}
+                size={Math.min(15, window.innerWidth * 0.1)}
+              />
+            </div>
+          ) : authState && authStatus ? (
             <PiSignOut className={`w-[9vw] h-[7vw]`} />
           ) : (
             <FaRegUserCircle className={`w-[9vw] h-[7vw]`} />
