@@ -4,6 +4,7 @@ import { MdEmail } from "react-icons/md";
 import { useMyContext } from "./Context";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLocation } from "react-router-dom";
 
 // Register ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
@@ -21,7 +22,7 @@ function Subscribe() {
     }
   };
 
-
+const location = useLocation()
   useEffect(() => {
 
       gsap.fromTo(
@@ -40,12 +41,12 @@ function Subscribe() {
       );
 
 
-  }, []); 
+  }, [location.pathname]); 
 
 
   return (
     <Container>
-      <div onClick={() => setCartState(false)} className={`w-full overflow-hidden flex justify-center  ${value ? 'hidden' : ''} bg-white ${cartState ? 'brightness-75' : ''}`} id="subscribe" ref={containerRef}>
+      <div onClick={() => setCartState(false)} className={` w-full overflow-hidden flex justify-center  ${value ? 'hidden' : ''} bg-white ${cartState ? 'brightness-75' : ''}`} id="subscribe" ref={containerRef}>
         <div className="mt-[40px] mb-[20px] h-auto   px-8 bg-black text-white w-[90%] flex flex-col justify-evenly xl:justify-around xl:px-0 xl:py-6 rounded-3xl py-10 gap-8 lg:flex-row lg:items-center animate-me3">
           <h1 className="font-integral text-[6vw]  md:text-[5vw] lg:font-integral2 lg:text-[3.5vw] text-left xl:font-semibold xl:text-[2.5vw] capitalize  leading-[7vw] xs:leading-8 tracking-wide  xs:tracking-wider xs:text-[6vw] lg:leading-10 xl:w-[40%] 2xl:text-[2vw]">
             STAY UPTO DATE ABOUT OUR LATEST OFFERS

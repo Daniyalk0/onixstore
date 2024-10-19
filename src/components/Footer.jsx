@@ -7,6 +7,7 @@ import Container from "./Container";
 import { useMyContext } from "./Context";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLocation } from "react-router-dom";
 
 // Register ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
@@ -14,6 +15,7 @@ gsap.registerPlugin(ScrollTrigger);
 function Footer() {
   const { value, setValue, cartState, setCartState } = useMyContext();
   const containerRef = useRef(null);
+  const location = useLocation()
 
   useEffect(() => {
 
@@ -32,7 +34,7 @@ function Footer() {
       }
     );
 
-  }, []); 
+  }, [location.pathname]); 
 
   return (
     <Container>

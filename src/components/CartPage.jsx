@@ -26,59 +26,38 @@ function CartPage() {
   const [quantity, setQuantity] = useState(1);
   const [subtotal, setSubtotal] = useState(0);
   const [discount, setDiscount] = useState(0);
-  const [deliveryFee, setDeliveryFee] = useState(allProducts.length ? 10 : 0); 
+  const [deliveryFee, setDeliveryFee] = useState(allProducts.length ? 10 : 0);
   const [total, setTotal] = useState(0);
   const [AppliedPromoCode, setAppliedPromoCode] = useState();
   const [promoCodeText, setpromoCodeText] = useState(true);
   const [clickedItem, setClickedItem] = useState("");
 
   useEffect(() => {
-    const hasAnimatedCartPage = sessionStorage.getItem("hasAnimatedCartPage");
-
-    if (!hasAnimatedCartPage) {
-      gsap.fromTo(
-        ".animate-me",
-        {
-          opacity: 0,
-          y: 50, 
-        },
-        {
-          opacity: 1, 
-          y: 0, 
-          duration: 1.5, 
-          delay: 2.2, 
-        }
-      );
-
-      sessionStorage.setItem("hasAnimatedCartPage", "true");
-    } else {
-      gsap.fromTo(
-        ".animate-me",
-        {
-          opacity: 0, 
-          y: 50, 
-        },
-        {
-          opacity: 1,
-          y: 0, 
-          duration: 1.5, 
-          delay: 0.2, 
-        }
-      );
-    }
-  }, []); 
+    gsap.fromTo(
+      ".animate-me",
+      {
+        opacity: 0,
+        y: 50,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1.5,
+      }
+    );
+  }, []);
 
   const viewport = window.innerWidth;
   useEffect(() => {
     console.log(viewport);
   }, [viewport]);
 
-  const [promoCode, setPromoCode] = useState(""); 
-  const [promoDiscount, setPromoDiscount] = useState(0); 
+  const [promoCode, setPromoCode] = useState("");
+  const [promoDiscount, setPromoDiscount] = useState(0);
 
   const validPromoCodes = {
-    SAVE10: 0.1, 
-    SAVE50: 50, 
+    SAVE10: 0.1,
+    SAVE50: 50,
   };
 
   useEffect(() => {
@@ -136,7 +115,6 @@ function CartPage() {
           </h1>
         </div>
         <div className="flex flex-col items-center px-8 xs:px-4 lg:flex-row lg:items-start lg:justify-between  lg:mt-7 lg:px-4 xl:px-16">
-          
           <div className=" border-t-[1px] border-[#1010102d] lg:border-b-[1px]  w-full flex flex-col gap-10  overflow-y-auto pt-7 xs:mt-10 lg:pt-0 lg:w-[62%] lg:mt-0  lg:max-h-[400px] xl:max-h-[400px] xl:w-[55%] mt-10 mb-16 xl:min-h-[320px] animate-me">
             {allProducts.length > 0 ? (
               allProducts.map((cart) => (
@@ -219,7 +197,10 @@ function CartPage() {
                               onClick={(event) => {
                                 if (!itemsLoading) {
                                   if (cart.productQuantity === 1) {
-                                    removeProduct(cart?.productImage, cart?.$id);
+                                    removeProduct(
+                                      cart?.productImage,
+                                      cart?.$id
+                                    );
                                   }
                                   event.preventDefault(); // Prevent navigation
                                   decreaseQuantity(cart?.$id); // Call your decreaseQuantity function
