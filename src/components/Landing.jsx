@@ -86,12 +86,12 @@ function Landing() {
               </p>
             </div>
 
-            <div className="overflow-hidden">
+            <div className="animate-me">
               <GlobalBtn
               route={"/Men's Sneaker"}
                 text={"shop now"}
                 className={
-                  " w-[95vw] xs:text-[3vw] text-[2.5vw] py-3 mt-[15px] md:w-[94vw] md:mt-[25px] lg:w-[20vw] lg:text-[1.1vw] xl:w-[13vw] xxs:w-[93vw] animate-me" 
+                  " w-[95vw] xs:text-[3vw] text-[2.5vw] py-3 mt-[15px] md:w-[94vw] md:mt-[25px] lg:w-[20vw] lg:text-[1.1vw] xl:w-[13vw] xxs:w-[93vw] " 
                 }
                 />
             </div>
