@@ -33,7 +33,7 @@ function Subscribe() {
           duration: 1.2,
           scrollTrigger: {
             trigger: containerRef.current, 
-            start: "bottom bottom", 
+            start: "center bottom", 
             toggleActions: "play none none none", 
           },
         }

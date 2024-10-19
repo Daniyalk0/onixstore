@@ -26,7 +26,7 @@ function Footer() {
         duration: 1.2,
         scrollTrigger: {
           trigger: containerRef.current, 
-          start: "top center", 
+          start: "center bottom", 
           toggleActions: "play none none none", 
         },
       }
