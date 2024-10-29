@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import { useEffect, useState } from "react";
 import products from "../products.json";
@@ -40,9 +40,11 @@ function ProductDetails() {
     allProducts,
     addProductByQuantityLoading,
     cartItems,
+    authStatus,
   } = useMyContext();
 
   const [isProductSaved, setIsProductSaved] = useState();
+  const navigate = useNavigate()
 
   useEffect(() => {
     const dat = data?.find((d) => d.id === slug);
@@ -410,13 +412,15 @@ function ProductDetails() {
             </div>
 
             <GlobalBtn
-              onClick={() => {
-                console.log("okaaayyy");
-
-                handleAddToCart();
-                setTimeout(() => {
-                  setProductQuantity(1);
-                }, 200);
+               onClick={() => {
+                if (authStatus) {
+                  handleAddToCart()
+                    setTimeout(() => {
+                      setProductQuantity(1)
+                    }, 200);
+                } else {
+                  navigate("/auth");
+                }
               }}
               text={
                 addProductByQuantityLoading ? (
