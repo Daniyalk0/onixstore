@@ -1,23 +1,24 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./components/Home.jsx";
-import ProductDetails from "./components/ProductDetails.jsx";
-import Subscribe from "./components/Subscribe.jsx";
-import Bags from "./components/Categories/Bags.jsx";
-import Boots from "./components/Categories/Boots.jsx";
-import Caps from "./components/Categories/Caps.jsx";
-import Sneekers from "./components/Categories/Sneekers.jsx";
 import { MyProvider } from "./components/Context.jsx";
-import CartPage from "./components/CartPage.jsx";
-import About from "./components/About.jsx";
-import Signup from "./register/Signup.jsx";
-import Login from "./register/Login.jsx";
-import Authentication from "./register/Authentication.jsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AuthLayout from "./register/AuthLayout.jsx";
 import { SnackbarProvider } from "notistack";
+
+import Home from "./components/Home.jsx";
+const ProductDetails = lazy(() => import("./components/ProductDetails.jsx"));
+const Subscribe = lazy(() => import("./components/Subscribe.jsx"));
+const Bags = lazy(() => import("./components/Categories/Bags.jsx"));
+const Boots = lazy(() => import("./components/Categories/Boots.jsx"));
+const Caps = lazy(() => import("./components/Categories/Caps.jsx"));
+const Sneekers = lazy(() => import("./components/Categories/Sneekers.jsx"));
+const CartPage = lazy(() => import("./components/CartPage.jsx"));
+const About = lazy(() => import("./components/About.jsx"));
+const Authentication = lazy(() => import("./register/Authentication.jsx"));
+
+const Loading = () => <div>Loading...</div>;
 
 const router = createBrowserRouter([
   {
@@ -30,39 +31,75 @@ const router = createBrowserRouter([
       },
       {
         path: "/Product-details/:slug",
-        element: <ProductDetails />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <ProductDetails />
+          </Suspense>
+        ),
       },
       {
         path: "/subscribe",
-        element: <Subscribe />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Subscribe />
+          </Suspense>
+        ),
       },
       {
         path: "/Men's Boot",
-        element: <Boots />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Boots />
+          </Suspense>
+        ),
       },
       {
         path: "/Men's Sneaker",
-        element: <Sneekers />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Sneekers />
+          </Suspense>
+        ),
       },
       {
         path: "/Bag",
-        element: <Bags />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Bags />
+          </Suspense>
+        ),
       },
       {
         path: "/Cap",
-        element: <Caps />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Caps />
+          </Suspense>
+        ),
       },
       {
         path: "/CartPage",
-        element: <CartPage />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <CartPage />
+          </Suspense>
+        ),
       },
       {
         path: "/about",
-        element: <About />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <About />
+          </Suspense>
+        ),
       },
       {
         path: "/auth",
-        element: <Authentication />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Authentication />
+          </Suspense>
+        ),
       },
     ],
   },
