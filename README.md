@@ -36,7 +36,7 @@ Built OnixStore, a full-fledged e-commerce app with React and Appwrite (BAAS), f
    npm install
 4. **Create a .env file in the root directory of the project.**  
  - You can create the file manually
-5. **Start the development server**  
+5. **Configure the Environment Variables:**  
    ```bash
    # Appwrite Configuration
    VITE_APPWRITE_URL = your_appwrite_url
@@ -44,7 +44,7 @@ Built OnixStore, a full-fledged e-commerce app with React and Appwrite (BAAS), f
    VITE_APPWRITE_DATABASE_ID = your_appwrite_database_id
    VITE_APPWRITE_BUCKET_ID = your_appwrite_bucket_id
    VITE_APPWRITE_COLLECTION_ID = your_appwrite_collection_id
-6. **Start the development server**  
+6. **Run the Project Locally**  
    ```bash
    npm run dev
 
