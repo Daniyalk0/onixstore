@@ -10,7 +10,6 @@ Built OnixStore, a full-fledged e-commerce app with React and Appwrite (BAAS), f
 - ✔️ Cart Management
 - ✔️ Product Filtering (by price, color, size, etc.) 
 - ✔️ Real-time Data Storage and Retrieval (Appwrite Database)
-- ✔️ Real-time Data Storage and Retrieval (Appwrite Database)
 
 ## 🛠 Tech Stack  
 - ✔️ ReactJS  
@@ -42,12 +41,18 @@ Built OnixStore, a full-fledged e-commerce app with React and Appwrite (BAAS), f
 5. **Start the development server**  
    ```bash
    # Appwrite Configuration
-VITE_APPWRITE_URL = your_appwrite_url
-VITE_APPWRITE_PROJECT_ID = your_appwrite_project_id
-VITE_APPWRITE_DATABASE_ID = your_appwrite_database_id
-VITE_APPWRITE_BUCKET_ID = your_appwrite_bucket_id
-VITE_APPWRITE_COLLECTION_ID = your_appwrite_collection_id
+   VITE_APPWRITE_URL = your_appwrite_url
+   VITE_APPWRITE_PROJECT_ID = your_appwrite_project_id
+   VITE_APPWRITE_DATABASE_ID = your_appwrite_database_id
+   VITE_APPWRITE_BUCKET_ID = your_appwrite_bucket_id
+   VITE_APPWRITE_COLLECTION_ID = your_appwrite_collection_id
+
 
 6. **Run the Project Locally**
   ```bash
    npm run dev
+
+## 📬 Connect with Me  
+- 🌐 [Portfolio](https://daniyal-portfolio-delta.vercel.app/)  
+- 🔗 [LinkedIn](https://www.linkedin.com/in/daniyal-khan-648107263/)  
+- 📧 Email: [your@email.com](mailto:getdaniyalkhan@gmail.com)
