@@ -36,7 +36,7 @@ Built OnixStore, a full-fledged e-commerce app with React and Appwrite (BAAS), f
    npm install
 
 4. **Create a .env file in the root directory of the project.**  
-- ### You can create the file manually
+ - You can create the file manually
 
 5. **Start the development server**  
    ```bash
