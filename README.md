@@ -44,9 +44,9 @@ Built OnixStore, a full-fledged e-commerce app with React and Appwrite (BAAS), f
    VITE_APPWRITE_DATABASE_ID = your_appwrite_database_id
    VITE_APPWRITE_BUCKET_ID = your_appwrite_bucket_id
    VITE_APPWRITE_COLLECTION_ID = your_appwrite_collection_id
-6. **Run the Project Locally**
-  ```bash
-  npm run dev
+6. **Start the development server**  
+   ```bash
+   npm run dev
 
 ## 📬 Connect with Me  
 - 🌐 [Portfolio](https://daniyal-portfolio-delta.vercel.app/)  
